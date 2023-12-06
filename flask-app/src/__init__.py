@@ -37,6 +37,8 @@ def create_app():
     from src.products.products  import products
     from src.toy.toy import toy
     from src.customization.customization  import customization
+    from src.customer.customer import customer
+    from src.toy_manufacturer.toy_manufacturer import toy_manufacturer
 
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
@@ -44,6 +46,11 @@ def create_app():
     app.register_blueprint(toy_information, url_prefix='/t')
     toy_information.register_blueprint(toy, url_prefix='/c')
     toy_information.register_blueprint(customization, url_prefix='/p')
+
+    customerandmanufacturer = Blueprint('people', __name__)
+    app.register_blueprint(customerandmanufacturer, url_prefix = '/cm')
+    customerandmanufacturer.register_blueprint(customer, url_prefix = '/cust')
+    customerandmanufacturer.register_blueprint(toy_manufacturer, url_prefix = '/man')
 
     # Don't forget to return the app object
     return app
