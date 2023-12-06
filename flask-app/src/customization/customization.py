@@ -48,7 +48,7 @@ def add_new_product():
     toyID = the_data['toyID']
 
     # Constructing the query
-    query = 'insert into products (customizationo_type, toyID) values ("'
+    query = 'insert into products (customization_type, toyID) values ("'
     query += type + '", "'
     query += str(toyID) + ')'
     current_app.logger.info(query)
@@ -99,7 +99,7 @@ def update_customization(optionID):
 
 # Deletes a given drink
 # Also reduces the corresponding order's total price
-@barista.route('/customization/<optionID>', methods=['DELETE'])
+@customization.route('/customization/<optionID>', methods=['DELETE'])
 def delete_customization(optionID):
     query = '''
         DELETE
