@@ -2,6 +2,7 @@
 
 from flask import Flask
 from flaskext.mysql import MySQL
+from flask import Blueprint
 
 # create a MySQL object that we will use in other parts of the API
 db = MySQL()
