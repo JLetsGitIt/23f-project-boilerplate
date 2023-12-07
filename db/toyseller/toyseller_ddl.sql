@@ -3,7 +3,7 @@ CREATE DATABASE toy_sellers;
 grant all privileges on toy_sellers.* to 'webapp'@'%';
 flush privileges;
 
-USE DATABASE toy_sellers;
+USE toy_sellers;
 
 
 
