@@ -5,7 +5,7 @@ from src import db
 
 customization = Blueprint('customization', __name__)
 
-# Get all customers from the DB
+# Get all customizations from the DB
 @customization.route('/customization', methods=['GET'])
 def get_customization():
     cursor = db.get_db().cursor()
@@ -21,9 +21,9 @@ def get_customization():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get customer detail for customer with particular userID
+# Get customerization detail for customer with particular optionID
 @customization.route('/customization/<optionID>', methods=['GET'])
-def get_customer(optionID):
+def get_customization(optionID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from customization where id = {0}'.format(optionID))
     row_headers = [x[0] for x in cursor.description]
@@ -37,7 +37,7 @@ def get_customer(optionID):
     return the_response
 
 @customization.route('/customization', methods=['POST'])
-def add_new_product():
+def add_new_customization():
     
     # collecting data from the request object 
     the_data = request.json
@@ -68,18 +68,6 @@ def update_customization(optionID):
 
     type = the_data['Type']
     toyID = the_data['ToyID']
-    
-    # grab order_id and previous drink price for the given drink
-    # customizationInfo = get_customization_info(optionID)
-    
-    # orderID = str(drinkInfo['order_id'])
-    # prev_price = str(drinkInfo['price'])
-    
-    # calculate price change (if any)
-    # price_change = float(price) - float(prev_price)
-    
-    # update order total price
-    # order_query = 'UPDATE `Order` SET total_price = total_price + ' + str(price_change) + ' WHERE order_id = ' + str(orderID) + ';'
 
     current_app.logger.info(the_data)
 
@@ -92,33 +80,6 @@ def update_customization(optionID):
     
     cursor = db.get_db().cursor()
     cursor.execute(the_query)
-    # cursor.execute(order_query)
     db.get_db().commit()
 
     return "successfully editted customization #{0}!".format(optionID)
-
-# Deletes a given drink
-# Also reduces the corresponding order's total price
-@customization.route('/customization/<optionID>', methods=['DELETE'])
-def delete_customization(optionID):
-    query = '''
-        DELETE
-        FROM Customization
-        WHERE option_id = {0};
-    '''.format(optionID)
-    
-    # grab order_id and previous drink price for the given drink
-    # drinkInfo = get_drink_info(drinkID)
-    
-    # orderID = str(drinkInfo['order_id'])
-    # price = str(drinkInfo['price'])
-    
-    # update order total price
-    # order_query = 'UPDATE `Order` SET total_price = total_price - ' + str(price) + ' WHERE order_id = ' + str(orderID) + ';'
-    
-    cursor = db.get_db().cursor()
-    # cursor.execute(order_query)
-    cursor.execute(query)
-    
-    db.get_db().commit()
-    return "successfully deleted customization #{0}!".format(optionID)
