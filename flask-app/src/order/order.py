@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
+import json
 from src import db  
 
 orders = Blueprint('orders', __name__)
@@ -10,13 +11,13 @@ def get_orders():
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
-   for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
-   return jsonify(json_data)
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    return jsonify(json_data)
 
 @orders.route('/orders', methods=['POST'])
 def create_order():
-    data = request.get_json()
+    the_data = request.get_json()
     current_app.logger.info(the_data)
 
     date = the_data['date']
@@ -57,61 +58,42 @@ def get_order(orderID):
     return jsonify(json_data)
 
 
-@order.route('/editOrder/<orderID>', methods=['PUT'])
+@orders.route('/editOrder/<orderID>', methods=['PUT'])
 def update_order(orderID):
-    data = request.json  
+    data = request.json
 
-    quantity = data['quantity']
-    totalPrice = data['totalPrice']
-    date = data['date']  
-    deliveryStatus = data['deliveryStatus']
+    quantity = data['quantity']
+    totalPrice = data['totalPrice']
+    date = data['date']
+    deliveryStatus = data['deliveryStatus']
 
-    orderInfo = get_order_info(orderID)
-    
-    orderID = str(orderInfo['order_id'])
-    prev_price = str(orderInfo['total_price']) 
+    orderInfo = get_order(orderID)
 
-    price_change = float(totalPrice) - float(prev_price)  
+    orderID = str(orderInfo['order_id'])
+    prev_price = str(orderInfo['total_price'])
 
-    order_query = 'UPDATE `Order` SET total_price = total_price + ' + str(price_change) + ' WHERE order_id = ' + str(orderID) + ';'
+    price_change = float(totalPrice) - float(prev_price)
 
-    current_app.logger.info(data) 
+    order_query = 'UPDATE `Order` SET total_price = total_price + ' + str(price_change) + ' WHERE order_id = ' + str(orderID) + ';'
 
-    the_query = 'UPDATE `order` SET '
-    the_query += 'quantity = "' + quantity + '", '
-    the_query += 'totalPrice = "' + totalPrice + '",'
-    the_query += 'date = "' + date + '", '
-    the_query += 'deliveryStatus = ' + str(deliveryStatus) + ' '
-    the_query += 'WHERE orderID = {0};'.format(orderID)
+    current_app.logger.info(data)
 
-    current_app.logger.info(the_query)
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(the_query)
-    cursor.execute(order_query)
-    db.get_db().commit()
+    the_query = 'UPDATE `order` SET '
+    the_query += 'quantity = "' + quantity + '", '
+    the_query += 'totalPrice = "' + totalPrice + '",'
+    the_query += 'date = "' + date + '", '
+    the_query += 'deliveryStatus = ' + str(deliveryStatus) + ' '
+    the_query += 'WHERE orderID = {0};'.format(orderID)
 
-    return "successfully edited order #{0}!".format(orderID)
+    current_app.logger.info(the_query)
 
+    cursor = db.get_db().cursor()
+    cursor.execute(the_query)
+    cursor.execute(order_query)
+    db.get_db().commit()
 
-    
+    return "successfully edited order #{0}!".format(orderID)
 
-@orders.route('/deleteOrder/<orderID>', methods=['DELETE'])
-def delete_order(orderID):
-        query = '''DELETE FROM `order` WHERE order_id = {0}'''.format(orderID)
-        
-        price_per_item = row['price_per_item']
-        quantity = row['quantity']
-        total_price_reduction = price_per_item * quantity
-        
-        update_query = 'UPDATE `order` SET total_price = total_price - %s WHERE order_id = %s'
-        
-        cursor.execute(update_query, (total_price_reduction, orderID))
-        cursor.execute(query, (orderID,))
-        
-        db.get_db().commit()
-        
-        return "successfully deleted order #{0}!".format(orderID)
 
 
 
