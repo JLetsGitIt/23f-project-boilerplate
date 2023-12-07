@@ -39,21 +39,7 @@ insert into toy (toy_id, name, engagement_level, age_range, description, price, 
 insert into toy (toy_id, name, engagement_level, age_range, description, price, safety_rating, suitablility_for_special_needs, material_type, educational_value, category) values (39, 'Dabfeed', 503, 57, 'DMII unspf uncntrld', 999, 5, 'Nondisp fx of middle third of navicular bone of unsp wrist', 'wood', 82, 'instruments');
 insert into toy (toy_id, name, engagement_level, age_range, description, price, safety_rating, suitablility_for_special_needs, material_type, educational_value, category) values (40, 'Vinte', 211, 31, 'Tobacco use disord-unsp', 700, 1, 'Ped on sktbrd inj pick-up truck, pk-up/van, unsp, sequela', 'metal', 73, 'dolls');
 
-create table customer (
-	customer_id INT,
-	name.first_name VARCHAR(50),
-	name.last_name VARCHAR(50),
-	email VARCHAR(50),
-	mailing_address.street_address VARCHAR(50),
-	mailing_address.city VARCHAR(50),
-	mailing_address.zip_code VARCHAR(50),
-	mailing_address.country VARCHAR(50),
-	phone_number VARCHAR(50),
-	accessibility_needs VARCHAR(24),
-	cust_role VARCHAR(50),
-	children_ages INT,
-	children_intrests VARCHAR(7)
-);
+
 insert into customer (customer_id, name, email, mailing_address, phone_number, accessibility_needs, cust_role, children_ages, children_intrests) values (1, {'first_name':'Matthus','last_name':'Boldero'}, 'mboldero0@google.cn', {'street_address':'81547 Duke Court','city':'H̱olon','zip_code':null,'country':'Israel'}, '225-668-4163', 'hearing impairment', 'Programmer Analyst II', 2, 'art');
 insert into customer (customer_id, name, email, mailing_address, phone_number, accessibility_needs, cust_role, children_ages, children_intrests) values (2, {'first_name':'Wendy','last_name':'Manchett'}, 'wmanchett1@parallels.com', {'street_address':'31 Norway Maple Alley','city':'Hongxi','zip_code':null,'country':'China'}, '651-490-2614', 'hearing impairment', 'Analog Circuit Design manager', 2, 'art');
 insert into customer (customer_id, name, email, mailing_address, phone_number, accessibility_needs, cust_role, children_ages, children_intrests) values (3, {'first_name':'Georg','last_name':'Halleday'}, 'ghalleday2@senate.gov', {'street_address':'28 Pennsylvania Hill','city':'Kangle','zip_code':null,'country':'China'}, '928-187-0630', 'hearing impairment', 'Research Nurse', 8, 'art');
@@ -96,14 +82,6 @@ insert into customer (customer_id, name, email, mailing_address, phone_number, a
 insert into customer (customer_id, name, email, mailing_address, phone_number, accessibility_needs, cust_role, children_ages, children_intrests) values (40, {'first_name':'Gerald','last_name':'Strongitharm'}, 'gstrongitharm13@columbia.edu', {'street_address':'52665 Gulseth Alley','city':'Shenavan','zip_code':null,'country':'Armenia'}, '781-217-2632', 'mobility assistance', 'Geologist IV', 7, 'reading');
 
 
-
-create table environmental_certification (
-	environmental_value INT,
-	certification_description VARCHAR(50),
-	certification_id INT,
-	certification_name VARCHAR(25),
-	toy_id VARCHAR(50)
-);
 insert into environmental_certification (environmental_value, certification_description, certification_id, certification_name, toy_id) values (58, 'Unspecified fracture of left pubis, subsequent encounter for fracture with nonunion', 1, 'Living Building Challenge', '512');
 insert into environmental_certification (environmental_value, certification_description, certification_id, certification_name, toy_id) values (47, 'Injury of right internal carotid artery, intracranial portion, not elsewhere classified with loss of consciousness greater than 24 hours with return to pre-existing conscious level, initial encounter', 2, 'Energy Star', '968');
 insert into environmental_certification (environmental_value, certification_description, certification_id, certification_name, toy_id) values (3, 'Unstable burst fracture of third thoracic vertebra, subsequent encounter for fracture with delayed healing', 3, 'Green Globe', '165');
