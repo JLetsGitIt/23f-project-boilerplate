@@ -59,7 +59,7 @@ def create_app():
     app.register_blueprint(customerandmanufacturer, url_prefix = '/cm')
     
 
-    order_information = Blueprint('order_info', __name___)
+    order_information = Blueprint('order_info', __name__)
     order_information.register_blueprint(order, url_prefix = '/o')
     order_information.register_blueprint(gift_wrapping, url_prefix = '/gw')
     app.register_blueprint(order_information, url_prefix = '/oi')
