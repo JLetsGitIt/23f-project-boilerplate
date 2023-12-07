@@ -5,8 +5,6 @@ flush privileges;
 
 USE toy_sellers;
 
-
-
 CREATE TABLE toy (
   toy_id integer AUTO_INCREMENT NOT NULL,
   `name` VARCHAR(255) UNIQUE NOT NULL,
