@@ -46,12 +46,3 @@ def get_manufacturing_detail (id):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-
-
-
-
-
-
-
-
-
