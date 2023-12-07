@@ -1,16 +1,3 @@
-create table toy (
-	toy_id INT,
-	name VARCHAR(50),
-	engagement_level INT,
-	age_range INT,
-	description VARCHAR(50),
-	price INT,
-	safety_rating VARCHAR(2),
-	suitablility_for_special_needs VARCHAR(50),
-	material_type VARCHAR(9),
-	educational_value INT,
-	category VARCHAR(13)
-);
 insert into toy (toy_id, name, engagement_level, age_range, description, price, safety_rating, suitablility_for_special_needs, material_type, educational_value, category) values (1, 'Trilia', 131, 81, 'Adv eff typhoid vaccine', 947, 4, 'Person outsd hv veh inj in clsn w ped/anml in traf, sequela', 'fabric', 25, 'arts & crafts');
 insert into toy (toy_id, name, engagement_level, age_range, description, price, safety_rating, suitablility_for_special_needs, material_type, educational_value, category) values (2, 'Feednation', 959, 95, 'Abn periph nerv stud NEC', 135, 9, 'Nondisp fx of 2nd metatarsal bone, unsp ft, init for opn fx', 'cardboard', 75, 'arts & crafts');
 insert into toy (toy_id, name, engagement_level, age_range, description, price, safety_rating, suitablility_for_special_needs, material_type, educational_value, category) values (3, 'Yakidoo', 280, 17, 'Alzheimer''s disease', 709, 3, 'Wedge compression fracture of third lumbar vertebra', 'rubber', 80, 'dolls');
