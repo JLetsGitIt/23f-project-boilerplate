@@ -27,7 +27,7 @@ def get_toy():
 @toy.route('/toy/<toyID>', methods=['GET'])
 def get_customer(userID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from toy where id = {0}'.format(toyID))
+    cursor.execute('select * from toy where id = {0}'.format(userID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
