@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 
@@ -39,9 +39,9 @@ def add_new_feedback(data):
     current_app.logger.info(query)
 
     # executing and committing the insert statement
-    cursor = get_db().cursor()
+    cursor = db.get_db().cursor()
     cursor.execute(query)
-    get_db().commit()
+    db.get_db().commit()
 
     return 'Success!'
 
