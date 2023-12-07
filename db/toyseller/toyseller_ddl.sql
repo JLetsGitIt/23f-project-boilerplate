@@ -1,9 +1,10 @@
-CREATE DATABASE toy_sellers;
+CREATE DATABASE `toy_sellers`;
 
-grant all privileges on toy_sellers.* to 'webapp'@'%';
+CREATE USER 'webapp'@'%' IDENTIFIED 'abc123';
+grant all privileges on 'toy_sellers'.* to 'webapp'@'%';
 flush privileges;
 
-USE toy_sellers;
+USE 'toy_sellers';
 
 CREATE TABLE toy (
   toy_id integer AUTO_INCREMENT NOT NULL,
