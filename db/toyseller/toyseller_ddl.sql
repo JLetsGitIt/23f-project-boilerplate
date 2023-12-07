@@ -84,7 +84,7 @@ CREATE TABLE `order` (
   order_id INT NOT NULL AUTO_INCREMENT,
   toy_id INT NOT NULL,
   customer_id INT NOT NULL,
-  date DATE,
+  `date` DATE,
   quantity INT,
   delivery_status ENUM('delivered', 'pickup ready', 'returned', 'pending', 'in transit'),
   price_per_item DECIMAL(3, 2),
