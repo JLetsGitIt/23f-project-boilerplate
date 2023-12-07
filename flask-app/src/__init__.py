@@ -39,7 +39,7 @@ def create_app():
     from src.customization.customization  import customization
     from src.customer.customer import customer
     from src.feedback.feedback import feedback
-    from src.gift_wrapping.gift_wrapping import gift_wrapping
+    from src.gift_wrapping_service.gift_wrapping_services import gift_wrapping
     from src.toy.toy import toy
     from src.order.order import order
     from src.toy_manufacturer.toy_manufacturer import toy_manufacturer
