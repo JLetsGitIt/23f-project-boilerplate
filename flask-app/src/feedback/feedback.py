@@ -8,7 +8,8 @@ feedback = Blueprint('feedback', __name__)
 @feedback.route('/feedback', methods=['GET'])
 def get_feedback():
     cursor = db.get_db().cursor()
-    cursor.execute('select toy_id, customer_id, feedback_id, date, rating')
+    cursor.execute('select toy_id, customer_id, feedback_id, date, rating from feedback')
+    # cursor.execute('select * from feedback')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
