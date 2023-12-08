@@ -5,14 +5,14 @@ from src import db
 
 toy = Blueprint('toy', __name__)
 
-# Get all customers from the DB
+# Get all toys from the DB
 @toy.route('/toy', methods=['GET'])
 def get_toy():
     cursor = db.get_db().cursor()
     cursor.execute('select toy, name,\
         engagement_level, age_range, description, price, \
             safety_rating, suitability_for_special_needs, material_type, \
-                educational_value, category from customers')
+                educational_value, category from toys')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -23,9 +23,9 @@ def get_toy():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get customer detail for customer with particular userID
+# Get toy detail for toy with particular userID
 @toy.route('/toy/<toyID>', methods=['GET'])
-def get_customer(userID):
+def get_toy(userID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from toy where id = {0}'.format(userID))
     row_headers = [x[0] for x in cursor.description]
