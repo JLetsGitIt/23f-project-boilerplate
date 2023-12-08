@@ -8,7 +8,7 @@ customer = Blueprint('customer', __name__)
 @customer.route('/customer', methods=['GET'])
 def get_customer():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * from customers')
+    cursor.execute('SELECT * from customer')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -27,12 +27,8 @@ def add_new_customer():
     current_app.logger.info(the_data)
 
     #extracting the variable
-    f_name = the_data['first_name']
-    l_name = the_data['last_name']
-    s_address = the_data['street_address']
-    city = the_data['city']
-    zip_code = the_data['zip_code']
-    country = the_data['country']
+    name = the_data['name']
+    address = the_data['mailing_address']
     email = the_data['email']
     number = the_data['phone_number']
     access = the_data['accessibility_needs']
@@ -41,13 +37,9 @@ def add_new_customer():
     c_interests = the_data['customer_child_interests']
 
     # Constructing the query
-    query = 'insert into customer (customer_id, first_name, last_name, street_address, city, zip_code, country, email, phone_number, accessibility_needs,cust_role children_ages, children_interests) values ("'
-    query += f_name + '", "'
-    query += l_name + '", "'
-    query += s_address + '", "'
-    query += city + '", '
-    query += zip_code + '", '
-    query += country + '", '
+    query = 'insert into customer (customer_id, name, mailing_address, email, phone_number, accessibility_needs, cust_role, children_ages, children_interests) values ("'
+    query += name + '", "'
+    query += address + '", "'
     query += email + '", '
     query += number + '", '
     query += access + '", '
@@ -66,7 +58,7 @@ def add_new_customer():
 @customer.route('/customer/<customer_id>', methods=['GET'])
 def get_customer_detail (customer_id):
 
-    query = 'SELECT * FROM customers WHERE customer_id = ' + str(customer_id)
+    query = 'SELECT * FROM customer WHERE customer_id = ' + str(customer_id)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -86,12 +78,8 @@ def update_customer(customer_id):
     
     the_data = request.json
 
-    f_name = the_data['first_name']
-    l_name = the_data['last_name']
-    s_address = the_data['street_address']
-    city = the_data['city']
-    zip_code = the_data['zip_code']
-    country = the_data['country']
+    name = the_data['name']
+    address = the_data['street_address']
     email = the_data['email']
     number = the_data['phone_number']
     access = the_data['accessibility_needs']
@@ -105,12 +93,7 @@ def update_customer(customer_id):
     current_app.logger.info(the_data)
 
     query = 'UPDATE customer SET'
-    query += f_name + '", "'
-    query += l_name + '", "'
-    query += s_address + '", "'
-    query += city + '", '
-    query += zip_code + '", '
-    query += country + '", '
+    query += address + '", "'
     query += email + '", '
     query += number + '", '
     query += access + '", '
@@ -125,6 +108,4 @@ def update_customer(customer_id):
     cursor.execute(query)
     db.get_db().commit()
 
-    return "successfully editted drink #{0}!".format(customer_id)
-
-
+    return "successfully editted customer #{0}!".format(customer_id)
