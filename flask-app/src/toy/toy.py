@@ -9,11 +9,6 @@ toy = Blueprint('toy', __name__)
 @toy.route('/toy', methods=['GET'])
 def get_toy():
     cursor = db.get_db().cursor()
-    # cursor.execute('select toy, name,\
-    #     engagement_level, age_range, description, price, \
-    #         safety_rating, suitability_for_special_needs, material_type, \
-    #             educational_value, category from customers')
-    
     cursor.execute('select * from toy')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -29,7 +24,7 @@ def get_toy():
 @toy.route('/toy/<toyID>', methods=['GET'])
 def get_customer(toyID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from toy where id = {0}'.format(toyID))
+    cursor.execute('select * from toy where toy_id = {0}'.format(toyID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
