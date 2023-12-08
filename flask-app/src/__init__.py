@@ -55,7 +55,7 @@ def create_app():
     # app.register_blueprint(customization, url_prefix = '/cust')
     app.register_blueprint(customer, url_prefix = '/c')
     # app.register_blueprint(feedback, url_prefix = '/f')
-    app.register_blueprint(gift_wrapping, url_prefix = '/gw')
+    # app.register_blueprint(gift_wrapping, url_prefix = '/gw')
     app.register_blueprint(orders, url_prefix = '/o')
     # app.register_blueprint(toy_manufacturer, url_prefix = '/tm')
     # app.register_blueprint(toy_safety, url_prefix = '/ts')
